@@ -2,7 +2,7 @@ import styled from "styled-components"
 import TextInput from "../ui/input/TextInput"
 import { useState } from "react"
 import CustomButton from "../ui/button/CustomButton"
-
+import {ValidateForm} from '../../utils/ValidateForm'
 
 const FormStyle = styled.form`
     margin-top: 5rem;
@@ -25,12 +25,12 @@ function LoginForm () {
     const [error, setError] = useState('')
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!inputData.email){
+        if(!inputData.email || !ValidateForm().validateEmail(inputData.email)){
             setError((prev) => 'Ingrese un correo electrónico valido')
             return
         }
-        if(!inputData.password){
-            setError((prev) => 'Ingrese una contraseña valida')
+        if(!inputData.password || !ValidateForm().validatePassword(inputData.password)){
+            setError((prev) => 'Ingrese una contraseña valida de al menos 8 caracteres')
             return
         }
         try {

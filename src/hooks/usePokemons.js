@@ -4,6 +4,7 @@ function usePokemons(name, page){
     const [pokemons, setPokemons] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setIsError] = useState(false);
+    const controller = new AbortController()
 
     const getPokemons = async (page) => {
         setIsLoading((prev) => true)
@@ -80,6 +81,8 @@ function usePokemons(name, page){
         if(!name){
             getPokemons(page)
         }
+
+        return() => controller.abort('Cancel Request')
     }, [name, page])
 
     return {pokemons, isLoading, error}

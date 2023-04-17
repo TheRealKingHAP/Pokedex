@@ -44,6 +44,7 @@ function Home () {
             console.log(error.message);
         }
     }
+    
     return (
         <MainLayout className="home">
             <Logo src={'/pokedexLogo.png'} alt="pokedexLogo"/>
